@@ -1,0 +1,11 @@
+openai
+langchain
+google-search-results
+wikipedia
+faiss-cpu
+tiktoken
+promptlayer
+unstructured[local-inference]
+pypdf
+fastapi
+uvicorn[standard]
