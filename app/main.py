@@ -13,6 +13,7 @@ import base64
 import random
 from callback import LLMCallbackHandler
 
+split_page = os.environ.get('SPLIT_PAGE', 5)
 app = FastAPI(websocket_ping_interval=10)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -100,7 +101,7 @@ def handle_data(request: json):
     if docs is None:
         return None, None
 
-    split_pages = len(docs) // 5
+    split_pages = int(len(docs) / int(split_page))
     if split_pages == 0:
         split_pages = 1
 

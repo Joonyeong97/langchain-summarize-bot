@@ -2,17 +2,15 @@ version: '2'
 
 services:
   summarize-api:
-    image: summarize-bot:0.1
+    image: joon09/summarize-bot:0.1
     container_name: summarize-api
-    networks:
-      default:
-        ipv4_address: 10.5.0.219
     ports:
       - "8989:80"
     environment:
       - TZ=Asia/Seoul
-      - OPENAI_API_KEY=asd
-#      - HOST=192.168.0.109
+      - OPENAI_API_KEY=apikey
+      - MODEL_NAME=gpt-3.5-turbo
+      - SPLIT_PAGE=5
       - TIMEOUT=3600
       - KEEP_ALIVE=1800
     restart: always
@@ -20,10 +18,3 @@ services:
       - ./data/summarized_files:/app/results:z
       - ./data/pdf_files:/app/uploaded_files:z
     shm_size: "2gb"
-
-networks:
-  default:
-    external:
-      name: bot
-
-#  docker network create --gateway 10.5.0.1 --subnet 10.5.0.0/21 --driver bridge bot
